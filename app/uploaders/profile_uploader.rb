@@ -29,5 +29,19 @@ class ProfileUploader < CarrierWave::Uploader::Base
     process :resize_to_fill => [100, 100]
   end
 
+  version :x860 do
+    
+  end
+  
+  version :x600 do
+  
+  end
+  
+  version :x310 do
+    
+  end
+  
+  version :x120 do
 
+  end
 end
