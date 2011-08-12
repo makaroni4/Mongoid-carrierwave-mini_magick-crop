@@ -1,7 +1,6 @@
 class User
   include Mongoid::Document
 
-
   attr_accessor :crop_x, :crop_y, :crop_h, :crop_w
   
   field :username

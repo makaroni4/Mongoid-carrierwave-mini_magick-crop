@@ -1,4 +1,6 @@
 CarrierCrop::Application.routes.draw do
+  root :to => 'users#index'
+  
   match 'users/crop_update/:id' => 'users#crop_update'
   resources :users do
     get 'crop', :on => :member
