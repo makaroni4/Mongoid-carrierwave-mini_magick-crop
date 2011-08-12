@@ -1,7 +1,7 @@
 class User
   include Mongoid::Document
 
-  attr_accessor :crop_x, :crop_y, :crop_h, :crop_w
+  attr_accessor :crop_x, :crop_y, :crop_h, :crop_w, :resolution
   
   field :username
   
@@ -14,8 +14,8 @@ class User
   
   def crop
     path = RAILS_ROOT + "/public" + self.profile_url
-    thumb_path = RAILS_ROOT + "/public" + self.profile.thumb.url
-    system "convert #{path} -crop #{self.crop_h.to_i}x#{self.crop_w.to_i}+#{self.crop_x.to_i}+#{self.crop_y.to_i} #{thumb_path}"
+    thumb_path = RAILS_ROOT + "/public" + self.profile.send("s#{self.resolution}".to_sym).url
+    system "convert #{path} -crop #{self.crop_h.to_i}x#{self.crop_w.to_i}+#{self.crop_x.to_i}+#{self.crop_y.to_i} "+ self.profile.send("s#{self.resolution}".to_sym).current_path
     puts "#{self.crop_w.to_i}x#{self.crop_h.to_i}+#{self.crop_y.to_i}+#{self.crop_x.to_i}"
   end
 end
