@@ -1,6 +1,6 @@
+# coding: UTF-8
 class User
   include Mongoid::Document
-
   attr_accessor :crop_x, :crop_y, :crop_h, :crop_w, :resolution
   
   field :username
@@ -13,13 +13,12 @@ class User
   end
   
   def crop
-    path = RAILS_ROOT + "/public" + self.profile_url
-    thumb_path = RAILS_ROOT + "/public" + self.profile.send("s#{self.resolution}".to_sym).url
-    self.profile.send("s#{self.resolution}".to_sym).crop("#{self.crop_h.to_i}x#{self.crop_w.to_i}+#{self.crop_x.to_i}+#{self.crop_y.to_i}")
-#     magic = "convert #{path} -crop #{self.crop_h.to_i}x#{self.crop_w.to_i}+#{self.crop_x.to_i}+#{self.crop_y.to_i} -resize #{self.resolution} "+ self.profile.send("s#{self.resolution}".to_sym).current_path
-#     system magic
-    self.profile.send("s#{self.resolution}".to_sym).resize(self.resolution)
-    puts magic
-#     puts "#{self.crop_w.to_i}x#{self.crop_h.to_i}+#{self.crop_y.to_i}+#{self.crop_x.to_i}"
+    img = Magick::Image::read(self.profile.current_path).first
+    img.crop!(self.crop_x.to_i, self.crop_y.to_i, self.crop_w.to_i, self.crop_h.to_i)
+
+    width, height = self.resolution.split("х")
+    img.resize!(width.to_i, height.to_i)
+    img.write(self.profile.send("s#{self.resolution}".to_sym).current_path)
+
   end
 end

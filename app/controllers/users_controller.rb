@@ -92,7 +92,13 @@ class UsersController < ApplicationController
     @user.crop_h = params[:user]["crop_h"]
     @user.crop_w = params[:user]["crop_w"]
     @user.resolution = params[:user]["resolution"]
-    @user.crop
-    redirect_to users_path
+    
+    respond_to do |format|
+      if @user.crop
+        format.js  { head :ok }
+      else
+        format.js  { head :error }
+      end
+    end
   end
 end
