@@ -72,6 +72,7 @@ GEM
       rake (>= 0.8.7)
       thor (~> 0.14.4)
     rake (0.9.2)
+    rmagick (2.13.1)
     subexec (0.1.0)
     thor (0.14.6)
     treetop (1.4.10)
@@ -90,3 +91,4 @@ DEPENDENCIES
   mongoid
   rails (= 3.0.7)
   rake (= 0.9.2)
+  rmagick

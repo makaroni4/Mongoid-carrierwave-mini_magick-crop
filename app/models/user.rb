@@ -15,7 +15,11 @@ class User
   def crop
     path = RAILS_ROOT + "/public" + self.profile_url
     thumb_path = RAILS_ROOT + "/public" + self.profile.send("s#{self.resolution}".to_sym).url
-    system "convert #{path} -crop #{self.crop_h.to_i}x#{self.crop_w.to_i}+#{self.crop_x.to_i}+#{self.crop_y.to_i} "+ self.profile.send("s#{self.resolution}".to_sym).current_path
-    puts "#{self.crop_w.to_i}x#{self.crop_h.to_i}+#{self.crop_y.to_i}+#{self.crop_x.to_i}"
+    self.profile.send("s#{self.resolution}".to_sym).crop("#{self.crop_h.to_i}x#{self.crop_w.to_i}+#{self.crop_x.to_i}+#{self.crop_y.to_i}")
+#     magic = "convert #{path} -crop #{self.crop_h.to_i}x#{self.crop_w.to_i}+#{self.crop_x.to_i}+#{self.crop_y.to_i} -resize #{self.resolution} "+ self.profile.send("s#{self.resolution}".to_sym).current_path
+#     system magic
+    self.profile.send("s#{self.resolution}".to_sym).resize(self.resolution)
+    puts magic
+#     puts "#{self.crop_w.to_i}x#{self.crop_h.to_i}+#{self.crop_y.to_i}+#{self.crop_x.to_i}"
   end
 end

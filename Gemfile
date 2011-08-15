@@ -6,4 +6,5 @@ gem 'mongoid'
 gem 'bson_ext'
 gem 'haml'
 gem 'mini_magick'
+gem 'rmagick'
 gem 'carrierwave', "0.5.4"
