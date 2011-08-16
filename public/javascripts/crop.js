@@ -37,8 +37,18 @@ $(function() {
 		
 		console.log($('#user_edit').attr('action'));
 		
-		$.post($('#user_edit').attr('action'), $('#user_edit').serialize(), function(data) {
-			console.log(data);
+		$.ajax({
+			type: 'POST',
+			url: $('#user_edit').attr('action'),
+			data: $('#user_edit').serialize(),
+		
+			success: function() {
+				$.jGrowl("Сохранено");
+			}, 
+			
+			error: function() {
+				$.jGrowl("Ошибка!");
+			}
 		});
 		
 		console.log('dd');
