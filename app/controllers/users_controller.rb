@@ -91,7 +91,7 @@ class UsersController < ApplicationController
     @user.crop_y = params[:user]["crop_y"]
     @user.crop_h = params[:user]["crop_h"]
     @user.crop_w = params[:user]["crop_w"]
-    @user.crop
+    @user.save
     redirect_to users_path
   end
 end
